@@ -36,49 +36,6 @@ export default async function Image() {
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            paddingLeft: '80px',
-            width: '650px',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '64px',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-              marginBottom: '16px',
-            }}
-          >
-            Abhijith S Mohan
-          </div>
-          <div
-            style={{
-              fontSize: '36px',
-              fontWeight: 500,
-              color: '#94A3B8',
-              marginBottom: '24px',
-            }}
-          >
-            Entrepreneur & Business Builder
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              fontSize: '24px',
-              fontWeight: 500,
-              color: '#6366F1',
-            }}
-          >
-            Marketing • AI • Technology
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
             position: 'absolute',
             right: 0,
             top: 0,
@@ -119,6 +76,52 @@ export default async function Image() {
               backgroundImage: 'linear-gradient(to top, rgba(10, 12, 16, 1) 0%, rgba(10, 12, 16, 0) 15%)',
             }}
           />
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            paddingLeft: '64px',
+            width: '850px',
+          }}
+        >
+          <div
+            style={{
+              fontSize: '64px',
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
+              marginBottom: '16px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Abhijith S Mohan
+          </div>
+          <div
+            style={{
+              fontSize: '36px',
+              fontWeight: 500,
+              color: '#94A3B8',
+              marginBottom: '24px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Entrepreneur & Business Builder
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '24px',
+              fontWeight: 500,
+              color: '#6366F1',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Marketing • AI • Technology
+          </div>
         </div>
       </div>
     ),
