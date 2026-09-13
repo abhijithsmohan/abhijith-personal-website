@@ -11,10 +11,13 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-  const profileImage = readFileSync(
+  const profileImageBuffer = readFileSync(
     join(process.cwd(), 'public/images/abhijith-profile.png')
   );
-  const profileImageBase64 = profileImage.toString('base64');
+  const profileImage = profileImageBuffer.buffer.slice(
+    profileImageBuffer.byteOffset,
+    profileImageBuffer.byteOffset + profileImageBuffer.byteLength
+  );
 
   return new ImageResponse(
     (
@@ -86,7 +89,7 @@ export default async function Image() {
           }}
         >
           <img
-            src={`data:image/png;base64,${profileImageBase64}`}
+            src={profileImage as unknown as string}
             alt="Abhijith S Mohan"
             style={{
               objectFit: 'cover',
