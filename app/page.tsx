@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
+import { generatePageGraph } from "@/lib/schema";
 
 /**
  * Personal Brand Homepage — Abhijith S Mohan (https://abhijithsmohan.in)
@@ -8,8 +10,16 @@ import { Button } from "@/components/ui/button";
  * Storyline: Hero -> What I Do -> Selected Work -> Current Focus -> Knowledge -> Philosophy -> Work With Me
  */
 export default function Home() {
+  const jsonLdGraph = generatePageGraph({
+    path: "/",
+    title: "Abhijith S Mohan — Entrepreneur & Business Builder",
+    description:
+      "Building Businesses at the Intersection of Marketing, AI & Technology.",
+  });
+
   return (
     <div className="flex flex-col gap-12 py-10 sm:gap-16 sm:py-16">
+      <JsonLd schema={jsonLdGraph} />
       {/* SECTION 1: HERO */}
       <section aria-labelledby="hero-heading" className="pt-2 sm:pt-6">
         <Container>
