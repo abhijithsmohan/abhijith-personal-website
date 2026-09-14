@@ -168,12 +168,20 @@ export default function WorkWithMePage() {
                 Define Perspective
               </a>
               <a
-                href="https://www.instagram.com/defineperspective/"
+                href="https://www.instagram.com/abhijithsmohan/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-10 items-center justify-center rounded-lg border border-[#1E2433] bg-[#12151E] px-6 text-xs font-semibold text-[#F8FAFC] transition-colors hover:border-[#333E56] hover:bg-[#1A1E2B]"
               >
                 Instagram
+              </a>
+              <a
+                href="https://wa.me/917306286862"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center justify-center rounded-lg border border-[#1E2433] bg-[#12151E] px-6 text-xs font-semibold text-[#F8FAFC] transition-colors hover:border-[#333E56] hover:bg-[#1A1E2B]"
+              >
+                WhatsApp
               </a>
             </div>
           </section>
