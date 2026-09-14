@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -21,36 +22,61 @@ export default function Home() {
     <div className="flex flex-col gap-12 py-10 sm:gap-16 sm:py-16">
       <JsonLd schema={jsonLdGraph} />
       {/* SECTION 1: HERO */}
-      <section aria-labelledby="hero-heading" className="pt-2 sm:pt-6">
+      <section aria-labelledby="hero-heading" className="pt-2 sm:pt-6 lg:pt-10">
         <Container>
-          <div className="flex flex-col items-start gap-6 max-w-4xl">
-            {/* Eyebrow */}
-            <p className="font-mono text-xs font-semibold tracking-widest text-[#6366F1] uppercase">
-              MARKETING × AI × TECHNOLOGY × BUSINESS
-            </p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-12 lg:items-center">
+            
+            {/* Left: Text Content */}
+            <div className="flex flex-col items-start gap-6 lg:col-span-7">
+              {/* Eyebrow */}
+              <p className="font-mono text-xs font-semibold tracking-widest text-[#6366F1] uppercase">
+                MARKETING × AI × TECHNOLOGY × BUSINESS
+              </p>
 
-            {/* H1 Headline - Single H1 on Page */}
-            <h1
-              id="hero-heading"
-              className="text-[36px] font-bold leading-[1.12] tracking-tight text-[#F8FAFC] sm:text-[54px] max-w-3xl"
-            >
-              Building Businesses at the Intersection of Marketing, AI &amp; Technology.
-            </h1>
+              {/* H1 Headline - Single H1 on Page */}
+              <h1
+                id="hero-heading"
+                className="text-[36px] font-bold leading-[1.12] tracking-tight text-[#F8FAFC] sm:text-[54px] max-w-3xl"
+              >
+                Building Businesses at the Intersection of Marketing, AI &amp; Technology.
+              </h1>
 
-            {/* Supporting Copy */}
-            <p className="max-w-2xl text-[18px] leading-[1.65] text-[#94A3B8] sm:text-[20px]">
-              I’m Abhijith S Mohan — an entrepreneur and business builder exploring how marketing, AI, technology and systems can turn opportunities into real businesses.
-            </p>
+              {/* Supporting Copy */}
+              <p className="max-w-2xl text-[18px] leading-[1.65] text-[#94A3B8] sm:text-[20px]">
+                I’m Abhijith S Mohan — an entrepreneur and business builder exploring how marketing, AI, technology and systems can turn opportunities into real businesses.
+              </p>
 
-            {/* CTAs */}
-            <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
-              <Button variant="primary" href="/projects">
-                Explore My Work
-              </Button>
-              <Button variant="secondary" href="/work-with-me">
-                Work With Me
-              </Button>
+              {/* CTAs */}
+              <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+                <Button variant="primary" href="/projects">
+                  Explore My Work
+                </Button>
+                <Button variant="secondary" href="/work-with-me">
+                  Work With Me
+                </Button>
+              </div>
             </div>
+
+            {/* Right: Portrait Image */}
+            <div className="relative w-full max-w-sm mx-auto h-[280px] sm:h-[320px] lg:h-auto lg:max-w-none lg:mx-0 lg:col-span-5 lg:aspect-[4/5] flex items-center justify-center">
+              <div className="relative w-full h-full opacity-95 grayscale">
+                <Image
+                  src="/images/abhijith-profile.png"
+                  alt="Abhijith S Mohan"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-[center_20%]"
+                />
+              </div>
+
+              {/* Soft Linear Gradients to naturally blend the image edges into the #0A0C10 background without obscuring the face */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C10] via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0A0C10] via-transparent to-transparent pointer-events-none lg:hidden" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0C10] via-[#0A0C10]/10 to-transparent pointer-events-none hidden lg:block" />
+              <div className="absolute inset-0 bg-gradient-to-l from-[#0A0C10]/30 via-transparent to-transparent pointer-events-none" />
+            </div>
+
           </div>
         </Container>
       </section>
