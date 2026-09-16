@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { generatePageGraph } from "@/lib/schema";
+import { getKnowledgeArticles } from "@/lib/content";
 
 /**
  * Personal Brand Homepage — Abhijith S Mohan (https://abhijithsmohan.in)
@@ -15,8 +16,10 @@ export default function Home() {
     path: "/",
     title: "Abhijith S Mohan — Entrepreneur & Business Builder",
     description:
-      "Building Businesses at the Intersection of Marketing, AI & Technology.",
+      "Building Businesses at the Intersection of Marketing, AI & Business.",
   });
+
+  const latestArticles = getKnowledgeArticles().slice(0, 3);
 
   return (
     <div className="flex flex-col gap-12 py-10 sm:gap-16 sm:py-16">
@@ -30,7 +33,7 @@ export default function Home() {
             <div className="flex flex-col items-start gap-6 lg:col-span-7">
               {/* Eyebrow */}
               <p className="font-mono text-xs font-semibold tracking-widest text-[#6366F1] uppercase">
-                MARKETING × AI × TECHNOLOGY × BUSINESS
+                MARKETING × AI × BUSINESS
               </p>
 
               {/* H1 Headline - Single H1 on Page */}
@@ -38,7 +41,7 @@ export default function Home() {
                 id="hero-heading"
                 className="text-[36px] font-bold leading-[1.12] tracking-tight text-[#F8FAFC] sm:text-[54px] max-w-3xl"
               >
-                Building Businesses at the Intersection of Marketing, AI &amp; Technology.
+                Building Businesses at the Intersection of Marketing, AI &amp; Business.
               </h1>
 
               {/* Supporting Copy */}
@@ -223,15 +226,41 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Intentional Editorial Empty State */}
-            <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/60 p-8 sm:p-10 flex flex-col items-start gap-3">
-              <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
-                [ KNOWLEDGE INDEX ]
-              </span>
-              <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
-                Essays, notes and deep-dives will appear here as I document what I’m learning, testing and building.
-              </p>
-            </div>
+            {latestArticles.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {latestArticles.map((article) => (
+                  <Link
+                    key={article.id}
+                    href={`/knowledge/${article.slug}`}
+                    className="group flex flex-col justify-between rounded-xl border border-[#1E2433] bg-[#12151E] p-5 transition-colors hover:border-[#333E56]"
+                  >
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#6366F1] mb-2">
+                        {article.category || "Article"}
+                      </p>
+                      <h3 className="text-sm font-bold text-[#F8FAFC] group-hover:text-[#6366F1] transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="mt-2 text-xs text-[#94A3B8] line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                    </div>
+                    <p className="mt-4 text-xs font-semibold text-[#64748B] group-hover:text-[#94A3B8] transition-colors flex items-center gap-1">
+                      Read <span aria-hidden="true">&rarr;</span>
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/60 p-8 sm:p-10 flex flex-col items-start gap-3">
+                <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
+                  [ KNOWLEDGE INDEX ]
+                </span>
+                <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
+                  Essays, notes and deep-dives will appear here as I document what I’m learning, testing and building.
+                </p>
+              </div>
+            )}
 
             {/* Explore Knowledge CTA */}
             <div>

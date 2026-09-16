@@ -9,11 +9,11 @@ import { generatePageGraph } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring marketing, AI, technology and business systems.",
+    "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring how marketing and AI can be used to build better businesses.",
   openGraph: {
     title: "About",
     description:
-      "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring marketing, AI, technology and business systems.",
+      "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring how marketing and AI can be used to build better businesses.",
     url: "https://abhijithsmohan.in/about",
   },
   alternates: {
@@ -28,7 +28,7 @@ export default function AboutPage() {
     path: "/about",
     title: "About",
     description:
-      "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring marketing, AI, technology and business systems.",
+      "Learn about Abhijith S Mohan, an entrepreneur and business builder exploring how marketing and AI can be used to build better businesses.",
   });
 
   const exploreList = [
@@ -80,7 +80,7 @@ export default function AboutPage() {
             </h1>
             <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-[#94A3B8]">
               <p className="font-medium text-[#F8FAFC]">
-                I’m Abhijith S Mohan — an entrepreneur and business builder exploring the intersection of marketing, AI, technology and business systems.
+                I’m Abhijith S Mohan — an entrepreneur and business builder exploring how marketing and AI can be used to build better businesses.
               </p>
               <p>
                 My work has taken me across digital marketing, content, data, creative production, project coordination and technology. Along the way, I&apos;ve worked with businesses, experimented with ideas, helped build a community initiative, and increasingly moved toward understanding how technology and AI can be used to build better systems and businesses.

@@ -1,4 +1,4 @@
-import { Project } from "@/types/content";
+import { Project, KnowledgeArticle } from "@/types/content";
 import { getCanonicalUrl } from "@/lib/utils";
 
 export const PERSON_ID = "https://abhijithsmohan.in/#person";
@@ -12,11 +12,20 @@ export function getPersonSchema() {
     url: "https://abhijithsmohan.in",
     jobTitle: "Entrepreneur & Business Builder",
     knowsAbout: [
-      "Digital Marketing",
+      "Marketing",
       "Artificial Intelligence",
-      "Technology",
+      "Business",
+      "Digital Marketing",
       "Business Strategy",
-      "Business Systems",
+      "Entrepreneurship",
+      "AI for Business",
+      "Marketing Strategy",
+      "Automation",
+      "Systems Thinking",
+      "Technology",
+      "Digital Products",
+      "Web Development",
+      "Digital Infrastructure",
     ],
     sameAs: ["https://github.com/abhijithsmohan"],
   };
@@ -29,7 +38,7 @@ export function getWebSiteSchema() {
     url: "https://abhijithsmohan.in",
     name: "Abhijith S Mohan",
     description:
-      "Building Businesses at the Intersection of Marketing, AI & Technology.",
+      "Abhijith S Mohan is an entrepreneur and business builder exploring how marketing and AI can be used to build better businesses.",
     publisher: {
       "@id": PERSON_ID,
     },
@@ -89,11 +98,46 @@ export function getCreativeWorkSchema(project: Project) {
   };
 }
 
+export function getArticleSchema(article: KnowledgeArticle) {
+  const url = getCanonicalUrl(`/knowledge/${article.slug}`);
+  const articleId = `${url}#article`;
+
+  const parsedDatePub = new Date(article.publishedAt);
+  const datePublished = !isNaN(parsedDatePub.getTime())
+    ? parsedDatePub.toISOString()
+    : undefined;
+
+  const parsedDateMod = article.updatedAt ? new Date(article.updatedAt) : null;
+  const dateModified = parsedDateMod && !isNaN(parsedDateMod.getTime())
+    ? parsedDateMod.toISOString()
+    : undefined;
+
+  // Use TechArticle for Technology, Systems, AI, else general Article
+  const type = ["Technology", "Systems", "AI"].includes(article.category) ? "TechArticle" : "Article";
+
+  return {
+    "@type": type,
+    "@id": articleId,
+    url: url,
+    headline: article.title,
+    description: article.excerpt,
+    author: {
+      "@id": PERSON_ID,
+    },
+    ...(datePublished ? { datePublished } : {}),
+    ...(dateModified ? { dateModified } : {}),
+    mainEntityOfPage: {
+      "@id": `${url}#webpage`,
+    },
+  };
+}
+
 export function generatePageGraph(options: {
   path: string;
   title: string;
   description: string;
   project?: Project;
+  article?: KnowledgeArticle;
 }) {
   const graph: Array<Record<string, unknown>> = [
     getPersonSchema(),
@@ -103,6 +147,10 @@ export function generatePageGraph(options: {
 
   if (options.project) {
     graph.push(getCreativeWorkSchema(options.project));
+  }
+  
+  if (options.article) {
+    graph.push(getArticleSchema(options.article));
   }
 
   return {

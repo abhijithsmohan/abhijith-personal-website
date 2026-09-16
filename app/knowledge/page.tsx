@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { KnowledgeList } from "@/components/knowledge/knowledge-list";
 import { getKnowledgeArticles } from "@/lib/content";
 import { getCanonicalUrl } from "@/lib/utils";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -78,69 +78,8 @@ export default function KnowledgePage() {
             </div>
           </section>
 
-          {/* Articles Listing or Editorial Empty State */}
-          <section className="space-y-6">
-            <h2 className="text-xl font-bold tracking-tight text-[#F8FAFC]">
-              Published Essays &amp; Notes
-            </h2>
-
-            {articles.length > 0 ? (
-              <div className="space-y-6">
-                {articles.map((article) => (
-                  <article
-                    key={article.id}
-                    className="rounded-xl border border-[#1E2433] bg-[#12151E] p-6 transition-colors hover:border-[#333E56]"
-                  >
-                    <div className="flex items-center justify-between text-xs text-[#64748B]">
-                      <span>{article.publishedAt}</span>
-                      <span>{article.readingTimeMinutes} min read</span>
-                    </div>
-
-                    <h3 className="mt-3 text-lg font-bold text-[#F8FAFC]">
-                      <Link
-                        href={`/knowledge/${article.slug}`}
-                        className="hover:text-[#6366F1] transition-colors"
-                      >
-                        {article.title}
-                      </Link>
-                    </h3>
-
-                    <p className="mt-2 text-sm text-[#94A3B8] leading-relaxed">
-                      {article.excerpt}
-                    </p>
-
-                    <div className="mt-4 pt-4 border-t border-[#1E2433]">
-                      <Link
-                        href={`/knowledge/${article.slug}`}
-                        className="text-xs font-semibold text-[#6366F1] hover:underline"
-                      >
-                        Read Article &rarr;
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-xl border border-dashed border-[#1E2433] bg-[#12151E]/50 p-12 text-center">
-                <div className="mx-auto max-w-md space-y-3">
-                  <p className="text-sm font-semibold text-[#F8FAFC]">
-                    Essays &amp; Writing In Compilation
-                  </p>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    Long-form essays and operational frameworks across Marketing, AI, Technology, and Business Systems are currently being authored and verified. Check back soon for initial releases.
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      href="/topics"
-                      className="inline-flex items-center text-xs font-semibold text-[#6366F1] hover:underline"
-                    >
-                      Explore Topic Taxonomy &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
-          </section>
+          {/* Interactive Knowledge List */}
+          <KnowledgeList articles={articles} categories={categories} />
         </div>
       </Container>
     </div>

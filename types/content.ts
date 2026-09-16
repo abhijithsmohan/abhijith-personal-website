@@ -49,7 +49,7 @@ export interface ClaimEvidence {
 
 /**
  * Capability pillar representing core domain expertise.
- * Core territory: Marketing × AI × Technology × Business
+ * Core territory: Marketing × AI × Business
  */
 export interface Capability {
   id: string;
@@ -273,6 +273,46 @@ export interface Project {
 }
 
 /**
+ * Primary categories for Knowledge Hub V1.
+ */
+export type KnowledgeCategory =
+  | "Business"
+  | "Marketing"
+  | "AI"
+  | "Technology"
+  | "Systems";
+
+/**
+ * Content Type classification for Knowledge Hub.
+ */
+export type KnowledgeContentType =
+  | "Insight"
+  | "Article"
+  | "Case Study"
+  | "Experiment"
+  | "Framework"
+  | "Build Log"
+  | "Now";
+
+/**
+ * Knowledge Article CTA Model
+ */
+export interface KnowledgeCTA {
+  label: string;
+  href: string;
+  description?: string;
+}
+
+/**
+ * Source citation model
+ */
+export interface KnowledgeSource {
+  title: string;
+  url?: string;
+  author?: string;
+}
+
+/**
  * Knowledge Article / Essay Entity.
  */
 export interface KnowledgeArticle {
@@ -280,6 +320,9 @@ export interface KnowledgeArticle {
   title: string;
   slug: string;
   excerpt: string;
+  category: KnowledgeCategory;
+  contentType: KnowledgeContentType;
+  author: "Abhijith S Mohan";
   /**
    * Plain text body of the article. Paragraphs are delimited by double newlines (\n\n).
    * Do NOT store raw HTML here — the page renderer splits on \n\n and renders each
@@ -290,8 +333,13 @@ export interface KnowledgeArticle {
   updatedAt?: string;
   readingTimeMinutes: number;
   featured: boolean;
+  keyTakeaway?: string;
   topics: Topic[];
   relatedProjectSlugs?: string[];
+  relatedArticleSlugs?: string[];
+  cta?: KnowledgeCTA;
+  sources?: KnowledgeSource[];
+  status: "draft" | "published";
   canonicalUrl?: string;
 }
 

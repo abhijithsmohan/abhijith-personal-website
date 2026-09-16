@@ -9,11 +9,11 @@ import { generatePageGraph } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI, technology and business.",
+    "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI and business.",
   openGraph: {
     title: "Work",
     description:
-      "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI, technology and business.",
+      "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI and business.",
     url: "https://abhijithsmohan.in/work",
   },
   alternates: {
@@ -26,7 +26,7 @@ export default function WorkPage() {
     path: "/work",
     title: "Work",
     description:
-      "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI, technology and business.",
+      "Explore Abhijith S Mohan's professional experience, selected projects and work across marketing, AI and business.",
   });
   const planetJewelPoints = [
     "Social media management",
@@ -151,7 +151,7 @@ export default function WorkPage() {
               Work
             </h1>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-[#94A3B8]">
-              My work sits across marketing, AI, technology and business — from hands-on digital marketing and creative production to project coordination, data and early-stage technology building.
+              My work sits across marketing, AI and business — from hands-on digital marketing and creative production to project coordination, data and early-stage technology building.
             </p>
           </header>
 

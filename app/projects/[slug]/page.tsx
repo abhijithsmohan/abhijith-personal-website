@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { getProjectBySlug, getProjects } from "@/lib/content";
+import { getProjectBySlug, getProjects, getKnowledgeArticleBySlug } from "@/lib/content";
+import type { KnowledgeArticle, Project } from "@/types/content";
 import { getCanonicalUrl } from "@/lib/utils";
 import { JsonLd } from "@/components/seo/json-ld";
 import { generatePageGraph } from "@/lib/schema";
@@ -152,6 +153,48 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
   };
+}
+
+function RelatedKnowledgeBlock({ project }: { project: Project }) {
+  if (!project.relatedKnowledgeSlugs || project.relatedKnowledgeSlugs.length === 0) return null;
+  
+  const relatedArticles = project.relatedKnowledgeSlugs
+    .map((slug: string) => getKnowledgeArticleBySlug(slug))
+    .filter((a: KnowledgeArticle | undefined) => a !== undefined && a.status === "published");
+
+  if (relatedArticles.length === 0) return null;
+
+  return (
+    <section className="space-y-6 border-t border-[#1E2433] pt-12">
+      <h2 className="text-2xl font-bold tracking-tight text-[#F8FAFC]">
+        Related Knowledge
+      </h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {relatedArticles.map((article: KnowledgeArticle | undefined) => {
+          if (!article) return null;
+          return (
+            <Link
+              key={article.id}
+              href={`/knowledge/${article.slug}`}
+              className="group flex flex-col justify-between rounded-xl border border-[#1E2433] bg-[#12151E] p-5 transition-colors hover:border-[#333E56]"
+            >
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#6366F1] mb-2">
+                  {article.category}
+                </p>
+                <h3 className="text-sm font-bold text-[#F8FAFC] group-hover:text-[#6366F1] transition-colors line-clamp-2">
+                  {article.title}
+                </h3>
+              </div>
+              <p className="mt-4 text-xs font-semibold text-[#64748B] group-hover:text-[#94A3B8] transition-colors flex items-center gap-1">
+                Read <span aria-hidden="true">&rarr;</span>
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
@@ -871,6 +914,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               </div>
             </section>
 
+            <RelatedKnowledgeBlock project={project} />
+
             {/* 12. CLOSING CTA */}
             <section className="rounded-xl border border-[#1E2433] bg-gradient-to-br from-[#12151E] to-[#1A1E2B] p-8 md:p-12 text-center space-y-6">
               <h2 className="text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
@@ -1404,6 +1449,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 </div>
               </div>
             </section>
+
+            <RelatedKnowledgeBlock project={project} />
 
             {/* 11. CLOSING CTA */}
             <section className="rounded-xl border border-[#1E2433] bg-gradient-to-br from-[#12151E] to-[#1A1E2B] p-8 md:p-12 text-center space-y-6">
@@ -2091,6 +2138,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               </div>
             </section>
           )}
+
+          <RelatedKnowledgeBlock project={project} />
 
           {/* 16. CLOSING CTA */}
           <section className="rounded-xl border border-[#1E2433] bg-gradient-to-br from-[#12151E] to-[#1A1E2B] p-8 md:p-12 text-center space-y-6">

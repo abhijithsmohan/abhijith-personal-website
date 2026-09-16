@@ -12,7 +12,7 @@ Primary positioning:
 Entrepreneur & Business Builder
 
 Core territory:
-Marketing × AI × Technology × Business
+Marketing × AI × Business
 
 The website is a long-term personal-brand headquarters, professional identity, knowledge hub, project/case-study database, discovery engine, and business opportunity gateway.
 

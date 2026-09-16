@@ -35,7 +35,7 @@ export function Footer() {
               Entrepreneur & Business Builder
             </p>
             <p className="text-xs text-[#64748B]">
-              Marketing × AI × Technology × Business
+              Marketing × AI × Business
             </p>
           </div>
 

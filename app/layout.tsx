@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     template: "%s | Abhijith S Mohan",
   },
   description:
-    "Building Businesses at the Intersection of Marketing, AI & Technology.",
+    "Building Businesses at the Intersection of Marketing, AI & Business.",
   openGraph: {
     title: "Abhijith S Mohan — Entrepreneur & Business Builder",
     description:
-      "Building Businesses at the Intersection of Marketing, AI & Technology.",
+      "Building Businesses at the Intersection of Marketing, AI & Business.",
     url: "https://abhijithsmohan.in",
     siteName: "Abhijith S Mohan",
     locale: "en_US",

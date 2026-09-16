@@ -120,7 +120,7 @@ export default async function Image() {
               whiteSpace: 'nowrap',
             }}
           >
-            Marketing • AI • Technology
+            Marketing • AI • Business
           </div>
         </div>
       </div>
