@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { generatePageGraph } from "@/lib/schema";
-import { getKnowledgeArticles } from "@/lib/content";
+import { getKnowledgeArticles, projects, experiences } from "@/lib/content";
 
 /**
  * Personal Brand Homepage — Abhijith S Mohan (https://abhijithsmohan.in)
@@ -20,6 +20,8 @@ export default function Home() {
   });
 
   const latestArticles = getKnowledgeArticles().slice(0, 3);
+  const selectedWork = projects.filter((p) => p.featured).slice(0, 3);
+  const currentFocus = experiences.filter((e) => e.isCurrent).slice(0, 3);
 
   return (
     <div className="flex flex-col gap-12 py-10 sm:gap-16 sm:py-16">
@@ -158,15 +160,41 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Intentional Editorial Empty State */}
-            <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/60 p-8 sm:p-10 flex flex-col items-start gap-3">
-              <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
-                [ 00 / PORTFOLIO INDEX ]
-              </span>
-              <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
-                Selected work will appear here as projects and case studies are documented.
-              </p>
-            </div>
+            {selectedWork.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {selectedWork.map((project) => (
+                  <Link
+                    key={project.id}
+                    href={`/projects/${project.slug}`}
+                    className="group flex flex-col justify-between rounded-xl border border-[#1E2433] bg-[#12151E] p-5 transition-colors hover:border-[#333E56]"
+                  >
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#6366F1] mb-2">
+                        {project.projectType || "Project"}
+                      </p>
+                      <h3 className="text-sm font-bold text-[#F8FAFC] group-hover:text-[#6366F1] transition-colors line-clamp-2">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-xs text-[#94A3B8] line-clamp-2">
+                        {project.shortDescription || project.summary}
+                      </p>
+                    </div>
+                    <p className="mt-4 text-xs font-semibold text-[#64748B] group-hover:text-[#94A3B8] transition-colors flex items-center gap-1">
+                      View Project <span aria-hidden="true">&rarr;</span>
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/60 p-8 sm:p-10 flex flex-col items-start gap-3">
+                <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
+                  [ 00 / PORTFOLIO INDEX ]
+                </span>
+                <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
+                  Selected work will appear here as projects and case studies are documented.
+                </p>
+              </div>
+            )}
 
             {/* View All Projects CTA */}
             <div>
@@ -197,15 +225,41 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Intentional Editorial Empty State */}
-            <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/40 p-8 sm:p-10 flex flex-col items-start gap-3">
-              <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
-                [ INITIATIVES &amp; R&amp;D ]
-              </span>
-              <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
-                Documented focus areas and active exploration will appear here as ongoing builds and strategic notes are published.
-              </p>
-            </div>
+            {currentFocus.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {currentFocus.map((focus) => (
+                  <Link
+                    key={focus.id}
+                    href={`/work`}
+                    className="group flex flex-col justify-between rounded-xl border border-[#1E2433] bg-[#12151E] p-5 transition-colors hover:border-[#333E56]"
+                  >
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#6366F1] mb-2">
+                        {focus.roleType || "Initiative"}
+                      </p>
+                      <h3 className="text-sm font-bold text-[#F8FAFC] group-hover:text-[#6366F1] transition-colors line-clamp-2">
+                        {focus.organization.name}
+                      </h3>
+                      <p className="mt-2 text-xs text-[#94A3B8] line-clamp-2">
+                        {focus.summary}
+                      </p>
+                    </div>
+                    <p className="mt-4 text-xs font-semibold text-[#64748B] group-hover:text-[#94A3B8] transition-colors flex items-center gap-1">
+                      View Details <span aria-hidden="true">&rarr;</span>
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-lg border border-[#1E2433] bg-[#12151E]/40 p-8 sm:p-10 flex flex-col items-start gap-3">
+                <span className="font-mono text-[11px] font-medium tracking-wider text-[#64748B] uppercase">
+                  [ INITIATIVES &amp; R&amp;D ]
+                </span>
+                <p className="text-sm leading-relaxed text-[#94A3B8] max-w-xl">
+                  Documented focus areas and active exploration will appear here as ongoing builds and strategic notes are published.
+                </p>
+              </div>
+            )}
           </div>
         </Container>
       </section>
